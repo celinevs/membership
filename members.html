@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Members List</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        color: #333;
+      }
+
+      header {
+        background-color: #fff8e1;
+        padding: 2px 10px;
+        margin-bottom: 30px;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .navbar ul {
+        list-style-type: none;
+        display: flex;
+        gap: 10px;
+      }
+
+      .navbar a {
+        color: #28231c;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+
+      .navbar a:hover {
+        background-color: #ffebad;
+      }
+
+      /* New styles for members list */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .page-title {
+        color: #4a3000;
+        font-size: 2em;
+        margin-bottom: 25px;
+        text-align: center;
+      }
+
+      .members-table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .members-table th,
+      .members-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ffebad;
+      }
+
+      .members-table th {
+        background-color: #fff8e1;
+        color: #4a3000;
+        font-weight: bold;
+        white-space: nowrap;
+      }
+
+      .members-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .members-table tr:hover {
+        background-color: #fff8e1;
+        transition: background-color 0.3s;
+      }
+
+      /* Responsive table */
+      @media (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+
+        .members-table {
+          display: block;
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+
+        .members-table th,
+        .members-table td {
+          padding: 12px;
+        }
+      }
+
+      /* Status colors */
+      .active {
+        color: #2e7d32;
+      }
+
+      .expired {
+        color: #c62828;
+      }
+      .buttons {
+        text-align: center;
+        margin-top: 20px;
+      }
+      .btn {
+        background-color: #28231c;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+
+      .btn:hover {
+        background-color: #615542;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <img src="{{ url_for('static', filename='feezee.png') }}" class="logo" width="90" height="90" />
+        <ul>
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="container">
+      <h1 class="page-title">Members List</h1>
+
+      <table class="members-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Membership Type</th>
+            <th>Attendance Count</th>
+            <th>Last Attendance</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for member in members %}
+          <tr>
+            <td>{{ member.id }}</td>
+            <td>{{ member.name }}</td>
+            <td>{{ member.membership_type }}</td>
+            <td>{{ member.attendance_count }}</td>
+            <td>{{ member.last_attendance }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="buttons">
+        <a href="{{ url_for('home') }}" class="btn">Back to Home</a>
+      </div>
+    </div>
+  </body>
+</html>
